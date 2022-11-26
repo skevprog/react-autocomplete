@@ -22,3 +22,37 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+.list {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  max-height: 400px;
+  width: 400px;
+  border: solid 1px gray;
+  overflow-y: auto;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.matching-letter {
+  background-color: steelblue;
+  font-weight: bold;
+  font-size: 20;
+}
+
+.active:hover {
+  background-color: darkgrey;
+  cursor: pointer;
+}
+
+.empty {
+  position: absolute;
+  text-align: center;
+  width: 400px;
+}
+
+.input {
+  padding: 10px;
+  width: 400px;
+}
