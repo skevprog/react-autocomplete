@@ -51,6 +51,10 @@ body {
   cursor: pointer;
 }
 
+.active {
+  background-color: darkgray;
+}
+
 .input {
   padding: 1rem;
   width: 400px;

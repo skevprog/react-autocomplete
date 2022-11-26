@@ -9,3 +9,10 @@ export interface PokemonApiResponse {
    previous: string | null
    results: Pokemon[]
  }
+
+ export enum KeyNameCodes {
+  ArrowDown = 'ArrowDown',
+  ArrowUp = 'ArrowUp',
+  Enter = 'Enter',
+  Escape = 'Escape',
+};
