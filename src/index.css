@@ -27,39 +27,36 @@ body {
   position: absolute;
   list-style: none;
   margin: 0;
-  max-height: 400px;
-  width: 400px;
+  max-height: 300px;
+  width: calc(400px + 2rem);
   border: solid 1px gray;
   overflow-y: auto;
   text-align: left;
-  padding: 0 10px;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.list > li {
+  padding: 1rem 0;
 }
 
 .matching-letter {
   background-color: steelblue;
   font-weight: bold;
-  font-size: 20;
+  font-size: 1.5rem;
 }
 
-.active:hover {
+.list > li:hover {
   background-color: darkgrey;
   cursor: pointer;
 }
 
-.empty {
-  position: absolute;
-  text-align: center;
-  width: 400px;
-}
-
 .input {
-  padding: 10px;
+  padding: 1rem;
   width: 400px;
+  font-size: 1rem;
 }
 
-.error {
-  color: red;
-  position: absolute;
-  text-align: center;
-  width: 400px;
+.word {
+  margin-left: 1rem;
 }

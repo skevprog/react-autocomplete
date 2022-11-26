@@ -5,3 +5,5 @@ export const debounce = (fn: (...args: any) => void, ms = 300) => {
      timeoutId = setTimeout(() => fn.apply(this, args), ms)
    }
  }
+
+ export const beginningMatchingRegex = (value: string): RegExp => new RegExp(`^${value.toLowerCase()}.*$`, 'g');

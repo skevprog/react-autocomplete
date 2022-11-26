@@ -1,0 +1,14 @@
+.status-label-container {
+   width: 400px;
+   position: absolute;
+   text-align: center;
+   margin-top: 1rem;
+}
+
+.info {
+   color: white;
+}
+
+.error {
+   color: red;
+}

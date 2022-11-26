@@ -13,6 +13,7 @@ function useFetch<DataType>(url: string) {
         const resp = await fetch(url)
         const data: DataType = await resp.json()
         setData(data)
+        if (error) setError('')
       } catch (err) {
         setError('Something went wrong')
         setData(undefined)

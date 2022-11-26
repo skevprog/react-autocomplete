@@ -2,10 +2,11 @@ import React, { useState, useCallback, useEffect, MouseEventHandler } from 'reac
 import useFetch from './hooks/useFetch'
 
 import { API_URL } from './utils/constants'
-import { debounce } from './utils'
+import { beginningMatchingRegex, debounce } from './utils'
 import { PokemonApiResponse, Pokemon } from './types'
 
 import './App.css'
+import StatusLabel from './component/StatusLabel'
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
 
   useEffect(() => {
     if (error || !value || !data || data?.results?.length === 0) return;
-    const reg = new RegExp(`^${value.toLowerCase()}.*$`, 'g');
+    const reg = beginningMatchingRegex(value);
     const autocompleteResults = data.results
       .filter(({ name }: Pokemon) => name.toLowerCase().match(reg))
       .map(({ name }: Pokemon) => name)
@@ -45,20 +46,20 @@ function App() {
     setShowResults(true)
   }, [data])
 
-  const handleOnResultItemClick = (e: {currentTarget: { innerText: React.SetStateAction<string> }}) => {
+  const handleOnResultItemClick = (e: { currentTarget: { innerText: React.SetStateAction<string> } }) => {
     setValue(e.currentTarget.innerText);
     setPokenames([]);
     setShowResults(false);
   };
 
   const highlightMatchingLetter = (word: string) => {
-    const reg = new RegExp(`^${value.toLowerCase()}.*$`, 'g');
+    const reg = beginningMatchingRegex(value);
     const matchingWord = value.toLocaleLowerCase().match(reg)?.[0];
 
     return word.split('').map((letter, index) => (
       <span
         key={`${letter}-${index}`}
-        className={`${matchingWord && word[index] === matchingWord[index] ? 'matching-letter' : ''}`}
+        className={`${word[index] === matchingWord?.[index] ? 'matching-letter' : ''}`}
       >
         {letter}
       </span>
@@ -72,17 +73,16 @@ function App() {
         {pokeNames.map((name, index) => {
           return (
             <li
-              className="active"
               key={`${name}-${index}`}
               onClick={handleOnResultItemClick}
             >
-              {highlightMatchingLetter(name)}
+              <p className="word">{highlightMatchingLetter(name)}</p>
             </li>
           )
         })}
       </ul>
     ) : (
-      <p className="empty">No results Found</p>
+      <StatusLabel status="info" message="No results Found" />
     )
 
   return (
@@ -93,9 +93,10 @@ function App() {
         className="input"
         onChange={(e) => handleOnChange(e)}
         value={value}
+        aria-label="Search"
       />
       {!error && showResults && renderResults()}
-      {error && <p className="error">{error}</p>}
+      {error && <StatusLabel status="error" message={error} />}
     </div>
   )
 }
