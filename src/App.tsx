@@ -95,7 +95,7 @@ function App() {
         value={value}
       />
       {!error && showResults && renderResults()}
-      {error && error}
+      {error && <p className="error">{error}</p>}
     </div>
   )
 }
